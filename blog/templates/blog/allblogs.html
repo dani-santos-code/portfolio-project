@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
     <title>Dani Santos</title>
 
@@ -35,7 +36,7 @@
               <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'allblogs'%}">Blog</a>
+              <a class="nav-link active" href="{% url 'allblogs'%}">Blog</a>
             </li>
           </ul>
         </div>
@@ -43,39 +44,25 @@
     </header>
 
     <main role="main">
-
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi, this is Dani!</h1>
-          <p class="lead text-muted">
-            I love making Django websites.</p>
-          <p>
-            <a href="mailto:santos.adaniel@gmail.com" class="btn btn-primary my-2">Email me! :)</a>
-          </p>
-        </div>
-      </section>
-      <div class="text-center">
-      <img class="img-thumbnail"src="{% static '/IMG_20180509_100232756.jpg'%}" width="200"/>
-    </div>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-            {% for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ job.image.url }}" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
+      <div class="container">
+        <h1 class="text-center pt-3">Welcome to Dani's Blog</h1>
+        <br />
+        <br />
+        <h2>Latest Posts</h2>
+        <hr />
+        <div class="row">
+        {% for blog in blogs.all %}
+          <div class="col-md-6">
+                <a href="{% url 'detail' blog.id %}"><h4 class="card-text">{{ blog.title }}</h4></a>
+                <p class="pt-2">{{blog.pub_date_pretty}}</p>
+                <br />
+                <img class="img-fluid"src="{{ blog.image.url }}" alt="Card image cap" height="200" width="200">
+                <p> {{blog.summary}}...</p>
           </div>
+        {% endfor %}
+        </div>
         </div>
       </div>
-
     </main>
 
     <footer class="footer text-muted">
